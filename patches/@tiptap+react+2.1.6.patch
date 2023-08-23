@@ -1,0 +1,96 @@
+diff --git a/node_modules/@tiptap/react/dist/index.cjs b/node_modules/@tiptap/react/dist/index.cjs
+index 5523924..1273d3e 100644
+--- a/node_modules/@tiptap/react/dist/index.cjs
++++ b/node_modules/@tiptap/react/dist/index.cjs
+@@ -460,6 +460,9 @@ class ReactNodeView extends core.NodeView {
+         if (typeof this.options.update === 'function') {
+             const oldNode = this.node;
+             const oldDecorations = this.decorations;
++            Object.keys(node.attrs).forEach((key) => {
++                this.renderer.element.setAttribute(key, node.attrs[key]);
++            });
+             this.node = node;
+             this.decorations = decorations;
+             return this.options.update({
+@@ -473,6 +476,9 @@ class ReactNodeView extends core.NodeView {
+         if (node === this.node && this.decorations === decorations) {
+             return true;
+         }
++        Object.keys(node.attrs).forEach((key) => {
++            this.renderer.element.setAttribute(key, node.attrs[key]);
++        });
+         this.node = node;
+         this.decorations = decorations;
+         updateProps({ node, decorations });
+diff --git a/node_modules/@tiptap/react/dist/index.js b/node_modules/@tiptap/react/dist/index.js
+index 8910324..4c4fa39 100644
+--- a/node_modules/@tiptap/react/dist/index.js
++++ b/node_modules/@tiptap/react/dist/index.js
+@@ -452,6 +452,9 @@ class ReactNodeView extends NodeView {
+         if (typeof this.options.update === 'function') {
+             const oldNode = this.node;
+             const oldDecorations = this.decorations;
++            Object.keys(node.attrs).forEach((key) => {
++                this.renderer.element.setAttribute(key, node.attrs[key]);
++            });
+             this.node = node;
+             this.decorations = decorations;
+             return this.options.update({
+@@ -465,6 +468,9 @@ class ReactNodeView extends NodeView {
+         if (node === this.node && this.decorations === decorations) {
+             return true;
+         }
++        Object.keys(node.attrs).forEach((key) => {
++            this.renderer.element.setAttribute(key, node.attrs[key]);
++        });
+         this.node = node;
+         this.decorations = decorations;
+         updateProps({ node, decorations });
+diff --git a/node_modules/@tiptap/react/dist/index.umd.js b/node_modules/@tiptap/react/dist/index.umd.js
+index 80ff3f9..2c6ca97 100644
+--- a/node_modules/@tiptap/react/dist/index.umd.js
++++ b/node_modules/@tiptap/react/dist/index.umd.js
+@@ -456,6 +456,9 @@
+           if (typeof this.options.update === 'function') {
+               const oldNode = this.node;
+               const oldDecorations = this.decorations;
++              Object.keys(node.attrs).forEach((key) => {
++                this.renderer.element.setAttribute(key, node.attrs[key]);
++              });
+               this.node = node;
+               this.decorations = decorations;
+               return this.options.update({
+@@ -469,6 +472,9 @@
+           if (node === this.node && this.decorations === decorations) {
+               return true;
+           }
++          Object.keys(node.attrs).forEach((key) => {
++            this.renderer.element.setAttribute(key, node.attrs[key]);
++          });
+           this.node = node;
+           this.decorations = decorations;
+           updateProps({ node, decorations });
+diff --git a/node_modules/@tiptap/react/src/ReactNodeViewRenderer.tsx b/node_modules/@tiptap/react/src/ReactNodeViewRenderer.tsx
+index a75b47e..8868581 100644
+--- a/node_modules/@tiptap/react/src/ReactNodeViewRenderer.tsx
++++ b/node_modules/@tiptap/react/src/ReactNodeViewRenderer.tsx
+@@ -153,6 +153,9 @@ class ReactNodeView extends NodeView<
+       const oldNode = this.node
+       const oldDecorations = this.decorations
+ 
++      Object.keys(node.attrs).forEach((key) => {
++        this.renderer.element.setAttribute(key, node.attrs[key]);
++      });
+       this.node = node
+       this.decorations = decorations
+ 
+@@ -169,6 +172,9 @@ class ReactNodeView extends NodeView<
+       return true
+     }
+ 
++    Object.keys(node.attrs).forEach((key) => {
++      this.renderer.element.setAttribute(key, node.attrs[key]);
++    });
+     this.node = node
+     this.decorations = decorations
+ 
